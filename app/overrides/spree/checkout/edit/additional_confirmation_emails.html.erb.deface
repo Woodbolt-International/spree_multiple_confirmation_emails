@@ -1,0 +1,10 @@
+<!-- insert_after "[data-hook='checkout_content'] div div.panel" -->
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="form-group">
+      <%= form.label :additional_confirmation_emails %>
+      <%= form.text_field :additional_confirmation_emails, class: 'form-control' %>
+    </div>
+  </div>
+</div>
