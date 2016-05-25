@@ -7,6 +7,10 @@ describe Spree::OrderMailer, :type => :mailer do
 
   before { create(:store) }
 
+  after(:each) do
+    ActionMailer::Base.deliveries.clear
+  end
+
   let(:order) do
     order = stub_model(Spree::Order)
     order.email = Faker::Internet.email
@@ -25,13 +29,19 @@ describe Spree::OrderMailer, :type => :mailer do
     end
 
     it "sends confirm email to all recipients" do
-      message = Spree::OrderMailer.confirm_email(order)
+      message = Spree::OrderMailer.confirm_email(order  )
+      message.deliver_now
       expect(message.to).to eq(order.all_recipients.split(","))
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+      expect(ActionMailer::Base.deliveries.first.to).to eq(order.all_recipients.split(","))
     end
 
     it "sends cancel email to all recipients" do
       message = Spree::OrderMailer.cancel_email(order)
+      message.deliver_now
       expect(message.to).to eq(order.all_recipients.split(","))
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+      expect(ActionMailer::Base.deliveries.first.to).to eq(order.all_recipients.split(","))
     end
   end
 
@@ -40,14 +50,20 @@ describe Spree::OrderMailer, :type => :mailer do
       order.additional_confirmation_emails = ""
     end
 
-    it "sends confirm email to all recipients" do
+    it "sends confirm email just to customer email" do
       message = Spree::OrderMailer.confirm_email(order)
+      message.deliver_now
       expect(message.to).to eq([order.email])
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+      expect(ActionMailer::Base.deliveries.first.to).to eq([order.email])
     end
 
-    it "sends cancel email to all recipients" do
+    it "sends cancel email just to customer email" do
       message = Spree::OrderMailer.cancel_email(order)
+      message.deliver_now
       expect(message.to).to eq([order.email])
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+      expect(ActionMailer::Base.deliveries.first.to).to eq([order.email])
     end
   end
 end
