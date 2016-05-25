@@ -6,3 +6,7 @@ en:
     attributes:
       spree/order:
         additional_confirmation_emails: Additional Confirmation Emails (comma separated)
+  spree:
+    multiple_emails:
+      label: "To notify others, add additional emails separated by commas"
+      placeholder: "ap@mail.com, rep@mail.com"

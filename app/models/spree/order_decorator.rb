@@ -8,8 +8,14 @@ module Spree
       additional_confirmation_emails_to_a.unshift(email).join(",")
     end
 
-    def additional_confirmation_emails_to_a
-      additional_confirmation_emails.split(/\s*,\s*/)
+    def additional_recipients
+      additional_confirmation_emails_to_a.join(",")
     end
+
+    private 
+
+      def additional_confirmation_emails_to_a
+        additional_confirmation_emails.split(/\s*,\s*/)
+      end
   end
 end

@@ -3,8 +3,8 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="form-group">
-      <%= form.label :additional_confirmation_emails %>
-      <%= form.text_field :additional_confirmation_emails, class: 'form-control' %>
+      <%= form.label :additional_confirmation_emails, Spree.t('multiple_emails.label') %>
+      <%= form.text_field :additional_confirmation_emails, class: 'form-control', placeholder: Spree.t('multiple_emails.placeholder') %>
     </div>
   </div>
 </div>
