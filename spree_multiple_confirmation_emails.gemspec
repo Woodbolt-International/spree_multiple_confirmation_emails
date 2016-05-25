@@ -3,8 +3,8 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_multiple_confirmation_emails'
   s.version     = '3.0.4'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'Delivers all system emails to multiple recipients'
+  s.description = s.summary
   s.required_ruby_version = '>= 2.0.0'
 
   s.author    = 'Paolo Tatone'
