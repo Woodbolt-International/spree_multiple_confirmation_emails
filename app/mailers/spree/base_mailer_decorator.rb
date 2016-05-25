@@ -9,6 +9,8 @@ Spree::BaseMailer.class_eval do
   prepend AddAllRecipients
 
   private
+  # this method will be implemented in each mailer_decorator
+  # retrieving order.all_recipients from the mailer context object
   def all_recipients
     ""
   end
