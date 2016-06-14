@@ -66,4 +66,18 @@ describe Spree::OrderMailer, :type => :mailer do
       expect(ActionMailer::Base.deliveries.first.to).to eq([order.email])
     end
   end
+
+  context "when all_recipients is blank" do
+    before do
+      allow(order).to receive(:all_recipients).and_return("")
+    end
+
+    it "sends confirm email just to customer email" do
+      message = Spree::OrderMailer.confirm_email(order)
+      message.deliver_now
+      expect(message.to).to eq([order.email])
+      expect(ActionMailer::Base.deliveries.count).to eq 1
+      expect(ActionMailer::Base.deliveries.first.to).to eq([order.email])
+    end
+  end
 end
